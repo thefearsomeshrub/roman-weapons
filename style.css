@@ -1,0 +1,716 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {    /* overall */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 1px 1px 2px #0000007a;
+  cursor: default;
+  user-select: none;
+}
+
+body {    /* body */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1d061a;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes animateVertical {    /* vertical floating block animation */
+  0%,100% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes animateHorizontal {    /* horizontal floating block animation */
+  0%,100% {
+    transform: translateX(10px);
+  }
+
+  50% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes animateDiagonal {    /* diagonal floating block animation */
+  0%,100% {
+    transform: translateY(5px) translateX(-5px);
+  }
+
+  50% {
+    transform: translateY(-5px) translateX(5px);
+  }
+}
+
+@keyframes animateDiagonalAlt {    /* diagonal floating block animation */
+  0%,100% {
+    transform: translateY(5px) translateX(5px);
+  }
+
+  50% {
+    transform: translateY(-5px) translateX(-5px);
+  }
+}
+
+
+/* HOMEPAGE */
+
+.container {    /* all buttons */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.container .box {    /* background and foreground */
+  position: relative;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 30px;
+  transition: 0.5s;
+}
+
+.container .box::before {    /* blur overlay */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 20px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+}
+
+.container .box::after {    /* blur */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 20px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+  filter: blur(30px);
+  transition: 0.5s;
+}
+
+.container .box:hover:before, .container .box:hover:after {    /* background animation */
+  transform: skewX(0deg);
+  left: 20px;
+  width: calc(100% - 90px);
+}
+
+.container .box:nth-child(1)::before, .container .box:nth-child(1)::after {    /* background colors */
+  background: linear-gradient(315deg,#ff0058,#ffbc00);
+}
+
+.container .box:nth-child(2)::before, .container .box:nth-child(2)::after {    /* background colors */
+  background: linear-gradient(315deg,#ff0058,#03a9f4);
+}
+
+.container .box:nth-child(3)::before, .container .box:nth-child(3)::after {    /* background colors */
+  background: linear-gradient(315deg,#00d0ff,#4dff03);
+}
+
+.container .box span {    /* floating blocks */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.container .box span::before {    /* upper floating block */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: 0.5s;
+  animation: animateVertical 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+}
+
+.container .box:hover span::before {    /* upper floating block hover effects */
+  top: -50px;
+  left: 50px;
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+}
+
+.container .box span::after {    /* lower floating block */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: 0.5s;
+  animation: animateVertical 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  animation-delay: -1s;
+  border: 2px solid rgba(255,255,255,0.05);
+}
+
+.container .box:hover span::after {    /* lower floating block hover effects */
+  bottom: -50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+}
+
+.container .box .content {    /* text container */
+  position: relative;
+  left: 0;
+  padding: 20px 40px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  transition: 0.5s;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.05);
+}
+
+.container .box:hover .content {    /* floating block placement */
+  left: -25px;
+  padding: 45px 40px;
+}
+
+.container .box .content h2 {    /* headings */
+  font-size: 2em;
+  color: #fff;
+  margin-bottom: 10px;
+  cursor: text;
+  text-shadow: 1px 1px 2px #0000004a;
+}
+
+.container .box .content p {    /* paragraphs */
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  line-height: 1.4em;
+  font-weight: 500;
+  cursor: text;
+}
+
+.container .box .content a {    /* links */
+  display: inline-block;
+  font-size: 1.1em;
+  color: #111;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  text-shadow: none;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+
+/* INFORMATION PAGES */
+
+.backdropOverlay h2 {    /* headings */
+  font-size: 2.3em;
+  color: #fff;
+  margin-top: 1.2em;
+  margin-bottom: 0.15em;
+  text-align: center;
+  text-shadow: 1px 1px 2px #0000004a;
+}
+
+.backdropOverlay {    /* text container */
+  height: 475px;
+  width: 660px;
+  border-radius: 20px;
+  position: absolute;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+.backdrop {    /* background (ballistae) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#ff0058,#ffbc00);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.backdropUnderlay {    /* background glow (ballistae) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#ff0058,#ffbc00);
+  filter: blur(30px);
+}
+
+.backdrop2 {    /* background (onagers) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#ff0058,#03a9f4);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.backdropUnderlay2 {    /* background glow (onagers) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#ff0058,#03a9f4);
+  filter: blur(30px);
+}
+
+.backdrop3 {    /* background (siege hooks) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#00d0ff,#4dff03);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.backdropUnderlay3 {    /* background glow (siege hooks) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#00d0ff,#4dff03);
+  filter: blur(30px);
+}
+
+.backdropOverlay .bodyText {    /* text */
+  color: #fff;
+  margin-inline: 3em;
+  font-size: 1.36em;
+  line-height: 1.4em;
+  font-weight: 500;
+}
+
+.backdropFloat {    /* floating blocks container */
+  height: 475px;
+  width: 660px;
+  position: absolute;
+  cursor: text;
+}
+
+.backdropFloat #aestheticFloat {    /* upper floating block (ballistae) */
+  position: absolute;
+  top: -50px;
+  left: 45px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat2 {    /* lower floating block (ballistae) */
+  position: absolute;
+  bottom: -50px;
+  right: 45px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat3 {    /* upper floating block (onagers) */
+  position: absolute;
+  top: -50px;
+  left: 45px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat4 {    /* right floating block (onagers) */
+  position: absolute;
+  bottom: 45px;
+  right: -50px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateHorizontal 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat5 {    /* lower floating block (onagers) */
+  position: absolute;
+  bottom: -48px;
+  left: -48px;
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateDiagonal 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat6 {    /* left floating block (siege hooks) */
+  position: absolute;
+  top: 45px;
+  left: -50px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat7 {    /* right floating block (siege hooks) */
+  position: absolute;
+  bottom: 45px;
+  right: -50px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat .homeButton svg {    /* return home icon (ballistae) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.22);
+  margin-top: 23px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat:hover .homeButton svg {    /* return home icon hover effect (ballistae) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.26);
+}
+
+.backdropFloat #aestheticFloat .homeButtonOverlay a {    /* return home icon link (ballistae) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat3 .homeButton svg {    /* return home icon (onagers) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.21);
+  margin-top: 23px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat3:hover .homeButton svg {    /* return home icon hover effect (onagers) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.24);
+}
+
+.backdropFloat #aestheticFloat3 .homeButtonOverlay a {    /* return home icon link (onagers) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat6 .homeButton svg {    /* return home icon (siege hooks) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.14);
+  margin-top: 53px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat6:hover .homeButton svg {    /* return home icon hover effect (siege hooks) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.175);
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.9));
+}
+
+.backdropFloat #aestheticFloat6 .homeButtonOverlay a {    /* return home icon link (siege hooks) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat2 .citationsButton svg {    /* citations icon (ballistae) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.22);
+  margin-top: 23px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat2:hover .citationsButton svg {    /* citations icon hover effect (ballistae) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.27);
+}
+
+.backdropFloat #aestheticFloat2 .citationsButtonOverlay a {    /* citations icon link (ballistae) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat4 .citationsButton svg {    /* citations icon (onagers) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.14);
+  margin-top: 53px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat4:hover .citationsButton svg {    /* citations icon hover effect (onagers) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.165);
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.9));
+
+}
+
+.backdropFloat #aestheticFloat4 .citationsButtonOverlay a {    /* citations icon link (onagers) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat7 .citationsButton svg {    /* citations icon (siege hooks) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.14);
+  margin-top: 53px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat7:hover .citationsButton svg {    /* citations icon hover effect (siege hooks) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.165);
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.9));
+}
+
+.backdropFloat #aestheticFloat7 .citationsButtonOverlay a {    /* citations icon link (siege hooks) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdropFloat #aestheticFloat8 {    /* lower floating block (citations) */
+  position: absolute;
+  bottom: -50px;
+  left: 180px;
+  width: 160px;
+  height: 100px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateVertical 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat9 {    /* right floating block (citations) */
+  position: absolute;
+  top: 45px;
+  right: -50px;
+  width: 100px;
+  height: 160px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateHorizontal 2s ease-in-out infinite;
+  animation-delay: -1s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat10 {    /* upper floating block (citations) */
+  position: absolute;
+  top: -48px;
+  left: -48px;
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  animation: animateDiagonalAlt 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.backdropFloat #aestheticFloat10 .homeButton svg {    /* return home icon (citations) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.14);
+  margin-top: 27px;
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.7));
+}
+
+.backdropFloat #aestheticFloat10:hover .homeButton svg {    /* return home icon hover effect (citations) */
+  opacity: 1;
+  transition: 300ms;
+  fill: rgba(255,255,255,0.165);
+  filter: drop-shadow(0 0.03px 12px rgba(0,0,0,0.9));
+}
+
+.backdropFloat #aestheticFloat10 .homeButtonOverlay a {    /* return home icon link (citations) */
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.backdrop4 {    /* background (citations) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#00d0ff,#ffa600);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.backdropUnderlay4 {    /* background glow (citations) */
+  height: 660px;
+  width: 475px;
+  border-radius: 20px;
+  position: absolute;
+  background: linear-gradient(315deg,#00d0ff,#ffa600);
+  filter: blur(30px);
+}
+
+.backdropFloat h2 {    /* heading (citations) */
+  font-size: 2.3em;
+  color: #fff;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  text-align: center;
+  text-shadow: 1px 1px 2px #0000004a;
+  cursor: text;
+}
+
+.backdropFloat .source {    /* text (citations) */
+  color: #fff;
+  margin-inline: 4em;
+  margin-bottom: 1.5em;
+  font-size: 1.36em;
+  font-weight: 500;
+  line-height: 1.4em;
+  cursor: text;
+}
+
+.backdropFloat .source a {    /* links (citations) */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1000;
+}
