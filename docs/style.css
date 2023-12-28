@@ -10,7 +10,7 @@
   user-select: none;
 }
 
-*:focus {    /* overall focus outline */
+*:focus-visible {    /* overall focus outline */
   outline: 2px solid #fff;
   
 }
